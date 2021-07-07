@@ -79,7 +79,7 @@ inputs:
     - timer: #京东试用
         parameters:
           name: try
-          cronExpression: "30 9 * * * *"
+          cronExpression: "0 30 9 * * * *"
           enable: true
           argument: jd_try
   environment: #  环境变量
