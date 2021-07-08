@@ -44,8 +44,12 @@ const JD_API_HOST = 'https://wq.jd.com/fav';
   if (!cookiesArr[0]) {
     $.msg('【京东账号一】取关京东店铺商品失败', '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
   }
+  let WHITELIST_COOKIE = [];
+  if (process.env.WHITELIST_COOKIE) {
+    WHITELIST_COOKIE = process.env.WHITELIST_COOKIE.split(" ");
+  }
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (cookiesArr[i]) {
+    if (cookiesArr[i] && WHITELIST_COOKIE.indexOf((i+1).toString())>-1) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
